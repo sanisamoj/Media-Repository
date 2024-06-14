@@ -52,3 +52,7 @@ Links para exemplos:
 > www.sanisamojrepository.com/media?media=7AMUEEiS3Ih2el03LWsFKQnLp8rKQWnsyvaO-wp5284283.jpg
  
 > www.sanisamojrepository.com/media?media=v7Fxz9QHnuvdr7GfnWumY0rLHwH9sszMJcLs-6f8fc8fba7e5b825373c21053bed9a36.jpg
+
+> www.sanisamojrepository.com/media?media=u6saO2qKAjlZCOYi5zjS6a10VuYqZTwyhlaX-giphy.webp
+
+> www.sanisamojrepository.com/media?media=XjegY36oZkQZWwlck2QyZLchg0Aec23kmDJA-catg.webp
