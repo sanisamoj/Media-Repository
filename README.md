@@ -46,13 +46,7 @@ Exemplo de resposta:
 ]
 ```
 
-Links para exemplos:
-> www.sanisamojrepository.com/media?media=TGK3ZYxmISMkCjxWGREq8OxLCo2Ze29dumFt-wp2741229.jpg
+Link para exemplos:
+> [www.sanisamojrepository.com/media?media=TGK3ZYxmISMkCjxWGREq8OxLCo2Ze29dumFt-wp2741229.jpg](https://www.sanisamojrepository.com/media?media=KFjxxgxvqlVHwAOfKoFBhlxe2UHKA7CddrBe-WhatsApp%20Image%202024-07-03%20at%2019.04.52.jpeg)
 
-> www.sanisamojrepository.com/media?media=7AMUEEiS3Ih2el03LWsFKQnLp8rKQWnsyvaO-wp5284283.jpg
- 
-> www.sanisamojrepository.com/media?media=v7Fxz9QHnuvdr7GfnWumY0rLHwH9sszMJcLs-6f8fc8fba7e5b825373c21053bed9a36.jpg
-
-> www.sanisamojrepository.com/media?media=u6saO2qKAjlZCOYi5zjS6a10VuYqZTwyhlaX-giphy.webp
-
-> www.sanisamojrepository.com/media?media=XjegY36oZkQZWwlck2QyZLchg0Aec23kmDJA-catg.webp
+> https://www.sanisamojrepository.com/media?media=Y70gAn1OleIQdKQXrEYhliuthbrqmnmZQkly-Captura%20de%20tela%202024-07-20%20230947.png
