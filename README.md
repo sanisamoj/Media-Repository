@@ -11,7 +11,7 @@ O repositório de mídia é um servidor que armazena vários tipos de mídias, c
 Para salvar e acessar as mídias são utilizados as requisições POST e GET rescpectivamente.
 
 Para acessar o Repositório de Mídias Sanisamoj visite:
-> www.sanisamojrepository.com
+> www.sanisamojrepository.com/image-repo
 
 Você pode buscar um arquivo de mídia específico utilizando o seguinte endpoint:
 
