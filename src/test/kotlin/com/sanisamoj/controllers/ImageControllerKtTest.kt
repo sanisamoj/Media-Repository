@@ -2,7 +2,11 @@ package com.sanisamoj.controllers
 
 import com.sanisamoj.GlobalContext.publicImagesDir
 import com.sanisamoj.GlobalContext.systemMessages
+<<<<<<< HEAD
 import com.sanisamoj.data.models.responses.SaveMediaResponse
+=======
+import com.sanisamoj.models.responses.SaveMediaResponse
+>>>>>>> 1ba77c07e5db177862abccf3f2200b5d1760f28c
 import com.sanisamoj.plugins.configureRouting
 import com.sanisamoj.utils.converters.ObjectConverter
 import io.ktor.client.request.*
