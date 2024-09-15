@@ -1,8 +1,8 @@
 package com.sanisamoj.routing
 
-import com.sanisamoj.GlobalContext.publicImagesDir
-import com.sanisamoj.GlobalContext.systemMessages
+import com.sanisamoj.GlobalContext.PUBLIC_IMAGES_DIR
 import com.sanisamoj.data.models.dataclass.SaveMediaResponse
+import com.sanisamoj.data.repository.LanguageResource
 import com.sanisamoj.plugins.configureRouting
 import com.sanisamoj.utils.converters.ObjectConverter
 import com.sanisamoj.utils.generators.TokenGenerator
@@ -16,8 +16,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class ImageControllerKtTest {
-
-    private val publicImageDir = publicImagesDir
+    private val systemMessages = LanguageResource()
     private val IMAGE_NAME_TO_UPLOAD = "image.jpeg"
     private val languageResource = systemMessages
 
@@ -33,7 +32,7 @@ class ImageControllerKtTest {
             configureRouting()
         }
 
-        val file = File(publicImageDir, IMAGE_NAME_TO_UPLOAD)
+        val file = File(PUBLIC_IMAGES_DIR, IMAGE_NAME_TO_UPLOAD)
 
         val token: String = TokenGenerator().moderator()
         val response = client.post("/media") {
@@ -58,7 +57,7 @@ class ImageControllerKtTest {
         val imageSavedResponseInObject = ObjectConverter()
             .arrayStringToListObject<SaveMediaResponse>(imageSavedResponseInString)
 
-        deleteImageSaved(File(publicImageDir, imageSavedResponseInObject[0].filename))
+        deleteImageSaved(File(PUBLIC_IMAGES_DIR, imageSavedResponseInObject[0].filename))
 
         assertEquals(HttpStatusCode.OK, response.status, languageResource.testMessages.postPublicImageTest)
     }

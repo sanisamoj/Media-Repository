@@ -1,11 +1,9 @@
-## <p align="center"><b>Servidor de repositório de mídias.</b></p>
-
-## Visão Geral
-O repositório de mídia é um servidor que armazena vários tipos de mídias, como imagens, vídeos gifs e documentos, podendo ser utilizado como um microservice de armazamento integrando a arquitetura.
+# Servidor de repositório de mídias.
+O repositório de mídia é um servidor que armazena vários tipos de mídias, como imagens, vídeos gifs e documentos, podendo ser utilizado como um microservice de armazamento integrando a alguma arquitetura maior, havendo a possibilidade de
+realizar uploads de imagens privadas, que só podem ser baixadas com autorização.
 
 ## Recursos
 - ***Armazenamento***: Armazenamento simples no Sistema Operacional.
-- ***Integração***: Ainda não implementado
 
 ## Salvando e Acessando as mídias
 Para salvar e acessar as mídias são utilizados as requisições POST e GET rescpectivamente.
@@ -16,14 +14,11 @@ Para acessar o Repositório de Mídias Sanisamoj visite:
 Você pode buscar um arquivo de mídia específico utilizando o seguinte endpoint:
 
 - Pesquisar por Mídia:
-Endpoint: /media?media=media.jpeg
-Exemplo: /media?media=minhaimagem.jpg
-Substitua media.jpeg ou minhaimagem.jpg pelo arquivo de mídia específico que você deseja recuperar.
-
-- Salvar Mídia:
-Endpont: /media
-Formato: MultipartData
-<br>
+> Endpoint: /media?media=media.jpeg
+> 
+> Exemplo: /media?media=minhaimagem.jpg
+> 
+> Substitua media.jpeg ou minhaimagem.jpg pelo arquivo de mídia específico que você deseja recuperar.
 
 Exemplo de resposta:
 ```json
@@ -45,6 +40,17 @@ Exemplo de resposta:
     }
 ]
 ```
+
+#### Execute o comando a seguir para construir a imagem Docker.
+
+    docker build -t image_repo:latest .
+
+#### Execute o comando a seguir para executar a imagem criada com o Docker.
+
+    docker run --image_repo briefly -p 6868:6868 image_repo:latest
+
+> As portas pré-definidas podem ser alteradas no arquivo *"aplication.conf"*, e devem ser refletidas na construção da imagem com o Docker.
+
 
 Link para exemplos:
 > [www.sanisamojrepository.com/media?media=TGK3ZYxmISMkCjxWGREq8OxLCo2Ze29dumFt-wp2741229.jpg](https://www.sanisamojrepository.com/media?media=KFjxxgxvqlVHwAOfKoFBhlxe2UHKA7CddrBe-WhatsApp%20Image%202024-07-03%20at%2019.04.52.jpeg)

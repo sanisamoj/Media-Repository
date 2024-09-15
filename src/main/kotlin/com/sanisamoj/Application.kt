@@ -17,7 +17,7 @@ fun Application.module() {
     configureStatusPage()
     configureSerialization()
     configureRouting()
-    cors()
+    configureHTTP()
     startBackgroundTasks()
 }
 

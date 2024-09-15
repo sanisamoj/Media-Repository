@@ -1,7 +1,6 @@
 package com.sanisamoj.data.repository
 
 import com.sanisamoj.GlobalContext.MIME_TYPE_ALLOWED
-import com.sanisamoj.GlobalContext.publicImagesDir
 import com.sanisamoj.data.models.enums.Errors
 import com.sanisamoj.data.models.interfaces.MediaRepository
 import com.sanisamoj.utils.checkers.VerifyMimeType
@@ -10,9 +9,8 @@ import io.ktor.http.content.*
 import java.io.File
 
 class MediaDefaultRepository: MediaRepository {
-    override suspend fun saveMedia(multipartData: MultiPartData): List<String> {
-        val pathToPublicImages = publicImagesDir
-        val imageNameList = saveAndReturnListNames(multipartData, pathToPublicImages)
+    override suspend fun saveMedia(multipartData: MultiPartData, path: File): List<String> {
+        val imageNameList = saveAndReturnListNames(multipartData, path)
         val imageSavedList: MutableList<String> = mutableListOf()
         imageNameList.forEach { name ->
             imageSavedList.add(name)
@@ -56,25 +54,9 @@ class MediaDefaultRepository: MediaRepository {
         return imageNameList
     }
 
-    override fun getMedia(name: String): File {
-        val publicImagesDir = publicImagesDir
-        val file = File("$publicImagesDir/$name")
-
+    override fun getMedia(name: String, path: File): File {
+        val file = File("$path/$name")
         return file
-    }
-
-    override fun getAllMediaNames(): List<String> {
-        val publicImagesDir = publicImagesDir
-        val files = publicImagesDir.listFiles()
-        val mediaNames: MutableList<String> = mutableListOf()
-
-        files?.forEach { file ->
-            if (file.isFile) {
-                mediaNames.add(file.name)
-            }
-        }
-
-        return mediaNames
     }
 
     override fun deleteMedia(file: File) {
