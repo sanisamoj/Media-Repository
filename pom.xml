@@ -3,27 +3,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.sanisamoj</groupId>
-<<<<<<< HEAD
     <artifactId>image-repository</artifactId>
-=======
-    <artifactId>imagesrepository</artifactId>
->>>>>>> 1ba77c07e5db177862abccf3f2200b5d1760f28c
     <version>0.0.1</version>
     <name>ImagesRepository</name>
     <description>ImagesRepository</description>
     <properties>
         <ktor_version>2.3.8</ktor_version>
         <kotlin.code.style>official</kotlin.code.style>
-        <kotlin_version>1.9.22</kotlin_version>
+        <kotlin_version>2.0.0</kotlin_version>
         <logback_version>1.4.14</logback_version>
         <slf4j_version>2.0.9</slf4j_version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
         <main.class>io.ktor.server.netty.EngineMain</main.class>
-<<<<<<< HEAD
         <kotlin.version>2.0.0</kotlin.version>
-=======
->>>>>>> 1ba77c07e5db177862abccf3f2200b5d1760f28c
     </properties>
     <repositories>
     </repositories>
@@ -156,7 +149,6 @@
             <version>${ktor_version}</version>
         </dependency>
 
-<<<<<<< HEAD
         <dependency>
             <groupId>org.jetbrains.kotlinx</groupId>
             <artifactId>kotlinx-html-jvm</artifactId>
@@ -167,15 +159,7 @@
             <artifactId>kotlin-stdlib-jdk8</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test</artifactId>
-            <version>${kotlin.version}</version>
-            <scope>test</scope>
-        </dependency>
 
-=======
->>>>>>> 1ba77c07e5db177862abccf3f2200b5d1760f28c
     </dependencies>
     <build>
         <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
@@ -190,11 +174,7 @@
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <groupId>org.jetbrains.kotlin</groupId>
-<<<<<<< HEAD
-                <version>${kotlin.version}</version>
-=======
-                <version>${kotlin_version}</version>
->>>>>>> 1ba77c07e5db177862abccf3f2200b5d1760f28c
+                <version>1.9.21</version>
                 <configuration>
                     <jvmTarget>1.8</jvmTarget>
                 </configuration>
@@ -205,15 +185,12 @@
                         <goals>
                             <goal>compile</goal>
                         </goals>
-<<<<<<< HEAD
                         <configuration>
                             <sourceDirs>
                                 <source>src/main/kotlin</source>
                                 <source>target/generated-sources/annotations</source>
                             </sourceDirs>
                         </configuration>
-=======
->>>>>>> 1ba77c07e5db177862abccf3f2200b5d1760f28c
                     </execution>
                     <execution>
                         <id>test-compile</id>
@@ -221,15 +198,12 @@
                         <goals>
                             <goal>test-compile</goal>
                         </goals>
-<<<<<<< HEAD
                         <configuration>
                             <sourceDirs>
                                 <source>src/test/kotlin</source>
                                 <source>target/generated-test-sources/test-annotations</source>
                             </sourceDirs>
                         </configuration>
-=======
->>>>>>> 1ba77c07e5db177862abccf3f2200b5d1760f28c
                     </execution>
                 </executions>
             </plugin>
@@ -272,32 +246,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
-                <version>1.9.22</version>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <compilerPlugins>
-                        <plugin>kotlinx-serialization</plugin>
-                    </compilerPlugins>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.jetbrains.kotlin</groupId>
-                        <artifactId>kotlin-maven-serialization</artifactId>
-                        <version>${kotlin_version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
     </build>

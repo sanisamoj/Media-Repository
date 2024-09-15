@@ -1,14 +1,11 @@
-package com.sanisamoj.controllers
+package com.sanisamoj.routing
 
 import com.sanisamoj.GlobalContext.publicImagesDir
 import com.sanisamoj.GlobalContext.systemMessages
-<<<<<<< HEAD
-import com.sanisamoj.data.models.responses.SaveMediaResponse
-=======
-import com.sanisamoj.models.responses.SaveMediaResponse
->>>>>>> 1ba77c07e5db177862abccf3f2200b5d1760f28c
+import com.sanisamoj.data.models.dataclass.SaveMediaResponse
 import com.sanisamoj.plugins.configureRouting
 import com.sanisamoj.utils.converters.ObjectConverter
+import com.sanisamoj.utils.generators.TokenGenerator
 import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
@@ -25,12 +22,6 @@ class ImageControllerKtTest {
     private val languageResource = systemMessages
 
     @Test
-    fun runAllTest() {
-        testGetImageName()
-        testPostImage()
-    }
-
-    @Test
     fun testGetImageName() = testApplication {
         val response = client.get("/media?media=image.jpeg")
         assertEquals(HttpStatusCode.OK, response.status, languageResource.testMessages.getImageTest)
@@ -44,7 +35,11 @@ class ImageControllerKtTest {
 
         val file = File(publicImageDir, IMAGE_NAME_TO_UPLOAD)
 
+        val token: String = TokenGenerator().moderator()
         val response = client.post("/media") {
+            headers {
+                append(HttpHeaders.Authorization, "Bearer $token")
+            }
             setBody(
                 MultiPartFormDataContent(
                     formData {

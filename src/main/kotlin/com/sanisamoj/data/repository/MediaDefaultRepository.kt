@@ -2,7 +2,7 @@ package com.sanisamoj.data.repository
 
 import com.sanisamoj.GlobalContext.MIME_TYPE_ALLOWED
 import com.sanisamoj.GlobalContext.publicImagesDir
-import com.sanisamoj.GlobalContext.systemMessages
+import com.sanisamoj.data.models.enums.Errors
 import com.sanisamoj.data.models.interfaces.MediaRepository
 import com.sanisamoj.utils.checkers.VerifyMimeType
 import com.sanisamoj.utils.generators.CharactersGenerator
@@ -10,8 +10,6 @@ import io.ktor.http.content.*
 import java.io.File
 
 class MediaDefaultRepository: MediaRepository {
-    private val languageResource = systemMessages
-
     override suspend fun saveMedia(multipartData: MultiPartData): List<String> {
         val pathToPublicImages = publicImagesDir
         val imageNameList = saveAndReturnListNames(multipartData, pathToPublicImages)
@@ -31,8 +29,6 @@ class MediaDefaultRepository: MediaRepository {
             when (part) {
 
                 is PartData.FileItem -> {
-
-                    // Verifica o formato da imagem
                     val mimeType = VerifyMimeType().returnType(part.originalFileName!!)
 
                     if (MIME_TYPE_ALLOWED.contains(mimeType) == false) {
@@ -40,22 +36,14 @@ class MediaDefaultRepository: MediaRepository {
                             deleteMedia(it)
                         }
 
-                        throw Exception(languageResource.errorMessages.unsupportedMediaType)
+                        throw Exception(Errors.UnsupportedMediaType.description)
                     }
 
-                    // Salva os bytes da imagem
                     val fileBytes = part.streamProvider().readBytes()
-
-                    // Gera um nome para a imagem
                     val filename = "${CharactersGenerator().generateWithNoSymbols()}-${part.originalFileName}"
-
-                    // Salva a imagem
                     File(path, filename).writeBytes(fileBytes)
-
-                    // Adiciona na array o nome da imagem salva
                     imageNameList.add(filename)
 
-                    // Adiciona na array o caminho junto com o nome do arquivo
                     imagePathOfSavedImages.add(File(path, filename))
                 }
 

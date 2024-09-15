@@ -6,16 +6,6 @@ import com.sanisamoj.utils.analyzers.dotEnv
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
-import io.ktor.server.plugins.ratelimit.*
-import kotlin.time.Duration.Companion.seconds
-
-fun Application.configureRateLimit() {
-    install(RateLimit) {
-        register {
-            rateLimiter(limit = 3, refillPeriod = 1.seconds)
-        }
-    }
-}
 
 fun Application.configureAuthentication() {
     val moderatorSecret: String = dotEnv("MODERATOR_JWT_SECRET")

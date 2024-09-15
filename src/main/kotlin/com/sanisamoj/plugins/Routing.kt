@@ -1,8 +1,7 @@
 package com.sanisamoj.plugins
 
-import com.sanisamoj.controllers.imageRouting
-<<<<<<< HEAD
-import com.sanisamoj.controllers.moderatorRouting
+import com.sanisamoj.routing.imageRouting
+import com.sanisamoj.routing.moderatorRouting
 import com.sanisamoj.data.pages.HomePage
 import com.sanisamoj.services.MediaService
 import io.ktor.http.*
@@ -26,16 +25,8 @@ fun Application.configureRouting() {
                 contentType = ContentType.Text.Html
             )
         }
+
         imageRouting()
         moderatorRouting()
-=======
-import io.ktor.server.application.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
-
-fun Application.configureRouting() {
-    routing {
-        imageRouting()
->>>>>>> 1ba77c07e5db177862abccf3f2200b5d1760f28c
     }
 }

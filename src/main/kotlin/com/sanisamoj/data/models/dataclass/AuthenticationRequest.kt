@@ -1,4 +1,4 @@
-package com.sanisamoj.models.generic
+package com.sanisamoj.data.models.dataclass
 
 import kotlinx.serialization.Serializable
 

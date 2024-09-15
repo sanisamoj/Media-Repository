@@ -1,4 +1,4 @@
-package com.sanisamoj.data.models.responses
+package com.sanisamoj.data.models.dataclass
 
 import kotlinx.serialization.Serializable
 
