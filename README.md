@@ -47,7 +47,7 @@ Exemplo de resposta:
 
 #### Execute o comando a seguir para executar a imagem criada com o Docker.
 
-    docker run --image_repo briefly -p 6868:6868 image_repo:latest
+    docker run --name image_repo -p 6868:6868 image_repo:latest
 
 > As portas pré-definidas podem ser alteradas no arquivo *"aplication.conf"*, e devem ser refletidas na construção da imagem com o Docker.
 
