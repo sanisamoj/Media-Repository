@@ -26,7 +26,7 @@ WORKDIR /app
 
 # Copie o arquivo .env e o arquivo .jar criado no estágio de build para o diretório de trabalho
 COPY .env .
-COPY --from=build /app/target/image-repository-0.2.0-jar-with-dependencies.jar image-repository.jar
+COPY --from=build /app/target/image-repository-0.3.0-jar-with-dependencies.jar image-repository.jar
 
 # Exponha a porta 6868
 EXPOSE 6868

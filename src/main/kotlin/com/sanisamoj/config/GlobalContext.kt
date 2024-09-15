@@ -1,10 +1,11 @@
-package com.sanisamoj
+package com.sanisamoj.config
 
-import com.sanisamoj.data.repository.MediaDefaultRepository
+import com.sanisamoj.data.models.interfaces.MediaRepository
+import com.sanisamoj.data.models.interfaces.ServerContainer
 import java.io.File
 
 object GlobalContext {
-    const val VERSION = "0.2.0"
+    const val VERSION = "0.3.0"
     private val currentProjectDir = System.getProperty("user.dir")
     const val MAX_FILE_SIZE: Int = 100 * 1024 * 1024 // 100MB
     const val MAX_HEADERS_SIZE: Int = 30 * 1024 * 1024 // 30MB
@@ -12,5 +13,8 @@ object GlobalContext {
 
     val PUBLIC_IMAGES_DIR = File("$currentProjectDir/images/public")
     val PRIVATE_IMAGES_DIR = File("$currentProjectDir/images/private")
-    val imageRepository = MediaDefaultRepository()
+
+    private val serverContainer: ServerContainer = DefaultServerContainer()
+
+    fun getMediaRepository(): MediaRepository = serverContainer.mediaRepository
 }

@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.sanisamoj</groupId>
     <artifactId>image-repository</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <name>ImagesRepository</name>
     <description>ImagesRepository</description>
     <properties>
@@ -157,21 +157,6 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
             <version>${kotlin.version}</version>
-        </dependency>
-
-        <!-- Kotlin coroutine dependency -->
-        <dependency>
-            <groupId>org.jetbrains.kotlinx</groupId>
-            <artifactId>kotlinx-coroutines-core</artifactId>
-            <version>1.6.4</version>
-        </dependency>
-
-        <!-- Kotlin coroutine reactor dependency -->
-        <dependency>
-            <groupId>org.jetbrains.kotlinx</groupId>
-            <artifactId>kotlinx-coroutines-reactor</artifactId>
-            <version>1.8.0-RC2</version>
-            <scope>runtime</scope>
         </dependency>
 
         <!-- MongoDB Kotlin driver dependency -->

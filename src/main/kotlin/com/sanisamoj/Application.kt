@@ -1,7 +1,7 @@
 package com.sanisamoj
 
+import com.sanisamoj.config.Config
 import com.sanisamoj.plugins.*
-import com.sanisamoj.utils.createImageDirectories
 import io.ktor.server.application.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +23,7 @@ fun Application.module() {
 
 private fun startBackgroundTasks() {
     CoroutineScope(Dispatchers.Default).launch {
-        createImageDirectories()
+        Config.initialize()
     }
 
 }

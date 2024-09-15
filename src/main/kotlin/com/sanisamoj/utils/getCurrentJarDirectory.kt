@@ -1,6 +1,6 @@
 package com.sanisamoj.utils
 
-import com.sanisamoj.GlobalContext
+import com.sanisamoj.config.GlobalContext
 import java.nio.file.Path
 import java.nio.file.Paths
 

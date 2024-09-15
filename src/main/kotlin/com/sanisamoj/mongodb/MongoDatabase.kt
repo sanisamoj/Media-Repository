@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit
 object MongoDatabase {
     private var database: MongoDatabase? = null
     private lateinit var client : MongoClient
-    private val connectionString: String = dotEnv("MONGODB_SERVER_URL")
+    private val connectionString: String = dotEnv("SERVER_URL")
     private val nameDatabase : String = dotEnv("NAME_DATABASE")
 
     private suspend fun init() {

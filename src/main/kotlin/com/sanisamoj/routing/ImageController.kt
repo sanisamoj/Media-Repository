@@ -1,6 +1,6 @@
 package com.sanisamoj.routing
 
-import com.sanisamoj.GlobalContext.MAX_HEADERS_SIZE
+import com.sanisamoj.config.GlobalContext.MAX_HEADERS_SIZE
 import com.sanisamoj.data.models.dataclass.SaveMediaResponse
 import com.sanisamoj.data.models.enums.Errors
 import com.sanisamoj.services.MediaService
@@ -21,8 +21,16 @@ fun Route.imageRouting() {
 
         rateLimit {
             get("{media?}") {
-                val imageName: String = call.parameters["media"] ?: return@get call.respondText("Nome da media não fornecido")
+                val imageName: String = call.parameters["media"] ?: throw Error(Errors.MediaNameNotProvided.description)
                 val image: File = MediaService().getMedia(imageName = imageName)
+                if (image.exists()) return@get call.respondFile(image)
+                else return@get call.respond(HttpStatusCode.NotFound)
+            }
+
+            get("/private/{media?}") {
+                val imageName: String = call.parameters["media"] ?: throw Error(Errors.MediaNameNotProvided.description)
+                val code: String = call.parameters["code"] ?: throw Error(Errors.ImageCodeNotProvided.description)
+                val image: File = MediaService().getPrivateMedia(imageName = imageName, code = code)
                 if (image.exists()) return@get call.respondFile(image)
                 else return@get call.respond(HttpStatusCode.NotFound)
             }
