@@ -10,6 +10,8 @@ Para salvar e acessar as mídias são utilizados as requisições POST e GET res
 
 Para acessar o Repositório de Mídias Sanisamoj visite:
 > www.sanisamojrepository.com/image-repo
+> 
+> https://www.sanisamojrepository.com/image-repo/media?media=aQgM8v1OW7lMXJOioZovqqwPC9e1w3hT2P8r-giphy2.webp
 
 Você pode buscar um arquivo de mídia específico utilizando o seguinte endpoint:
 
@@ -17,6 +19,8 @@ Você pode buscar um arquivo de mídia específico utilizando o seguinte endpoin
 > Endpoint: /media?media=media.jpeg
 > 
 > Exemplo: /media?media=minhaimagem.jpg
+> 
+> Exemplo: /media/private?media=minhaimagem.jpg&code=dsad
 > 
 > Substitua media.jpeg ou minhaimagem.jpg pelo arquivo de mídia específico que você deseja recuperar.
 
@@ -29,16 +33,46 @@ Exemplo de resposta:
         "code": null
     },
     {
-        "filename": "JQV5kpwNP5pKikIBacBQpxvNYc571nAFitKF-wp2741229.jpg",
-        "private": false,
-        "code": null
-    },
-    {
         "filename": "ePm2UwkgKVgfjOX4zr2U3iYbneVIfzgjLQMQ-wp5284283.jpg",
         "private": false,
         "code": null
     }
 ]
+```
+
+```json
+[
+  {
+    "filename": "JQV5kpwNP5pKikIBacBQpxvNYc571nAFitKF-wp2741229.jpg",
+    "private": true,
+    "code": "ylGZhSH#Zhi8t1DFAwCywH"
+  }
+]
+```
+
+## Para instalação
+Para instalar o projeto para testes, utilizaremos o Docker.
+
+- Instale a última versão do **Docker** em sua máquina.
+- Instale o **Mongodb** (Verifique na página oficial, ou monte uma imagem com o Docker).
+- Crie um arquivo **.env** na pasta raiz do projeto, ou adicione um arquivo **.env** manualmente na construção da imagem docker.
+
+```.env
+#URL do banco de dados MONGODB
+SERVER_URL=mongodb://host.docker.internal:27017
+#Nome do banco de dados do MONGODB
+NAME_DATABASE=ImageService
+
+#Moderator token secret
+MODERATOR_JWT_SECRET=
+#Audience do token, quem deve processar o token
+JWT_AUDIENCE=
+#Dominio do token, quem foi o emissor
+JWT_DOMAIN=
+
+#Moderator login
+MODERATOR_LOGIN=
+MODERATOR_PASSWORD=
 ```
 
 #### Execute o comando a seguir para construir a imagem Docker.
@@ -53,6 +87,18 @@ Exemplo de resposta:
 
 
 Link para exemplos:
-> [www.sanisamojrepository.com/media?media=TGK3ZYxmISMkCjxWGREq8OxLCo2Ze29dumFt-wp2741229.jpg](https://www.sanisamojrepository.com/media?media=KFjxxgxvqlVHwAOfKoFBhlxe2UHKA7CddrBe-WhatsApp%20Image%202024-07-03%20at%2019.04.52.jpeg)
+> https://www.sanisamojrepository.com/image-repo/media?media=tqUzlEKiwYEF8nnrVAnUsE43PRJl5vZBaGNR-sodium-odyssey.webp
 
-> https://www.sanisamojrepository.com/media?media=Y70gAn1OleIQdKQXrEYhliuthbrqmnmZQkly-Captura%20de%20tela%202024-07-20%20230947.png
+> https://www.sanisamojrepository.com/image-repo/media?media=kqHjqNreBbPisZukMEQLnHapbD26P354PtT9-anime-girl-nun-with-tattoo-2k-wallpaper-uhdpaper.com-740@3@a.jpg
+
+> https://www.sanisamojrepository.com/image-repo/media?media=ujcKswGfSeVgQzkCqlA7bWuptF3BqGOJlEyC-WhatsApp%20Image%202024-01-12%20at%2014.31.54.jpeg
+
+> https://www.sanisamojrepository.com/image-repo/media?media=jq5Xx7GWQvJKyg0fkF1auhmcjBTGzkgB80zu-_9f9747d1-7edc-4bb8-b25a-e76dfbc812ba.jpg
+
+> https://www.sanisamojrepository.com/image-repo/media?media=liS3bj4C7KYh4iT5B27BuOpUkDHH00FqMsF3-WhatsApp%20Image%202024-09-06%20at%2017.11.18.jpeg
+
+> https://www.sanisamojrepository.com/image-repo/media?media=vnAX9RDO8uK3w5QxhrOimy3d2LObcDP8W3Mb-WhatsApp%20Image%202024-09-06%20at%2017.11.17.jpeg
+
+> https://www.sanisamojrepository.com/image-repo/media?media=r7jt6m1xG0NocEBiojwrhWWcN5n74LZNnowh-giphy1.webp
+
+> https://www.sanisamojrepository.com/image-repo/media?media=eGSgfuVwHo7EM4GIgfTCKYqWvqbHhMAGrJYb-giphy3.webp
