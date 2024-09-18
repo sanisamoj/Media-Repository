@@ -20,6 +20,7 @@ fun Route.imageRouting() {
     route("/media") {
 
         rateLimit {
+            
             get("{media?}") {
                 val imageName: String = call.parameters["media"] ?: throw Error(Errors.MediaNameNotProvided.description)
                 val image: File = MediaService().getMedia(imageName = imageName)

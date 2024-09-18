@@ -102,3 +102,11 @@ Link para exemplos:
 > https://www.sanisamojrepository.com/image-repo/media?media=r7jt6m1xG0NocEBiojwrhWWcN5n74LZNnowh-giphy1.webp
 
 > https://www.sanisamojrepository.com/image-repo/media?media=eGSgfuVwHo7EM4GIgfTCKYqWvqbHhMAGrJYb-giphy3.webp
+
+> https://www.sanisamojrepository.com/image-repo/media?media=0W23t15LtWfIlwae20wWhQdKLr1IXUolVSzj-_a028f297-c5b4-4c84-814e-5d6d893486dc.jpg
+
+> https://www.sanisamojrepository.com/image-repo/media?media=krAcNxZX9t76ddGGIZ0Zgvhsd9IwpZcmoC0P-_afeaccc7-69e7-4de8-b755-bebb37ecc61a.jpg
+
+> https://www.sanisamojrepository.com/image-repo/media?media=Yywzs3f9CfKlbDxprqePA9exhKzbDZSoyBTz-_0c919b19-40c2-45cb-9566-0f2ed462da1b.jpg
+
+> https://www.sanisamojrepository.com/image-repo/media?media=2aL7ZiuKsu6y44k8dEXNTtWjqwGTpLR4Rc3L-_32143c12-7ab6-4ea1-91e1-1222e7ed73c8.jpg

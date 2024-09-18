@@ -8,7 +8,7 @@ import kotlin.time.Duration.Companion.seconds
 fun Application.configureRateLimit() {
     install(RateLimit) {
         register {
-            rateLimiter(limit = 3, refillPeriod = 1.seconds)
+            rateLimiter(limit = 4, refillPeriod = 1.seconds)
         }
     }
 }
