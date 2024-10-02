@@ -55,7 +55,7 @@ fun Route.mediaRouting() {
                     return@post call.respond(response)
                 }
 
-                get {
+                get("/all") {
                     val page: String? = call.request.queryParameters["page"]
                     val size: String? = call.request.queryParameters["size"]
                     val private: Boolean = call.request.queryParameters["private"] == "true"
