@@ -1,6 +1,7 @@
 package com.sanisamoj.routing
 
 import com.sanisamoj.config.GlobalContext.MAX_HEADERS_SIZE
+import com.sanisamoj.data.models.dataclass.ResponseWithPagination
 import com.sanisamoj.data.models.dataclass.SaveMediaResponse
 import com.sanisamoj.data.models.enums.Errors
 import com.sanisamoj.services.MediaService
@@ -15,7 +16,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import java.io.File
 
-fun Route.imageRouting() {
+fun Route.mediaRouting() {
 
     route("/media") {
 
@@ -30,7 +31,7 @@ fun Route.imageRouting() {
 
             get("/private/{media?}") {
                 val imageName: String = call.parameters["media"] ?: throw Error(Errors.MediaNameNotProvided.description)
-                val code: String = call.parameters["code"] ?: throw Error(Errors.ImageCodeNotProvided.description)
+                val code: String = call.request.queryParameters["code"] ?: throw Error(Errors.ImageCodeNotProvided.description)
                 val image: File = MediaService().getPrivateMedia(imageName = imageName, code = code)
                 if (image.exists()) return@get call.respondFile(image)
                 else return@get call.respond(HttpStatusCode.NotFound)
@@ -52,6 +53,36 @@ fun Route.imageRouting() {
                     val response: List<SaveMediaResponse> = MediaService().saveMedia(multipartData, !private)
 
                     return@post call.respond(response)
+                }
+
+                get {
+                    val page: String? = call.request.queryParameters["page"]
+                    val size: String? = call.request.queryParameters["size"]
+                    val private: Boolean = call.request.queryParameters["private"] == "true"
+
+                    val pageNumber: Int? = page?.toIntOrNull()
+                    val pageSize: Int? = size?.toIntOrNull()
+
+                    if (pageNumber != null && pageSize != null) {
+                        if(private) {
+                            val responseWithPagination: ResponseWithPagination<SaveMediaResponse> =
+                                MediaService().getAllPrivateMediaWithPagination(pageNumber, pageSize)
+                            return@get call.respond(responseWithPagination)
+                        } else {
+                            val responseWithPagination: ResponseWithPagination<SaveMediaResponse> =
+                                MediaService().getAllPublicMediaWithPagination(pageNumber, pageSize)
+                            return@get call.respond(responseWithPagination)
+                        }
+                    } else {
+                        throw Error(Errors.InvalidPageOrSizeParameters.description)
+                    }
+                }
+
+                delete {
+                    val name: String = call.request.queryParameters["name"].toString()
+                    val private: Boolean = call.request.queryParameters["private"] == "true"
+                    MediaService().deleteMedia(name, !private)
+                    return@delete call.respond(HttpStatusCode.OK)
                 }
             }
         }

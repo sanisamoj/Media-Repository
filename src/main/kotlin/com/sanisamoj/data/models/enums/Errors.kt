@@ -2,6 +2,7 @@ package com.sanisamoj.data.models.enums
 
 enum class Errors(val description: String) {
     TotalImageUploadSizeExceeded("Total image upload size exceeded!"),
+    InvalidPageOrSizeParameters("Invalid page or size parameter"),
     NoImageSaved("No images saved!"),
     ImageNotFound("Image not found!"),
     ImageSizeLimitExceeded("Image size limit exceeded!"),

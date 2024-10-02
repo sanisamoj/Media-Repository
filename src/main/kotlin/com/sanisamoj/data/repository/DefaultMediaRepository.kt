@@ -1,6 +1,8 @@
 package com.sanisamoj.data.repository
 
 import com.sanisamoj.config.GlobalContext.MIME_TYPE_ALLOWED
+import com.sanisamoj.config.GlobalContext.PRIVATE_IMAGES_DIR
+import com.sanisamoj.config.GlobalContext.PUBLIC_IMAGES_DIR
 import com.sanisamoj.data.models.dataclass.SavedMedia
 import com.sanisamoj.data.models.enums.Errors
 import com.sanisamoj.data.models.enums.Fields
@@ -85,7 +87,57 @@ class DefaultMediaRepository : MediaRepository {
         return savedMedia
     }
 
-    override fun deleteMedia(file: File) {
+    override fun getAllPublicMediaNames(page: Int, size: Int): List<String> {
+        val publicImagesDir: File = PUBLIC_IMAGES_DIR
+        val files = publicImagesDir.listFiles()?.filter { it.isFile }?.map { it.name }  ?: emptyList()
+
+        val startIndex = (page - 1) * size
+        val endIndex = minOf(startIndex + size, files.size)
+
+        return if (startIndex < files.size) {
+            files.subList(startIndex, endIndex)
+        } else {
+            emptyList()
+        }
+
+    }
+
+    override fun getAllPrivateMediaNames(page: Int, size: Int): List<String> {
+        val publicImagesDir: File = PRIVATE_IMAGES_DIR
+        val files = publicImagesDir.listFiles()?.filter { it.isFile }?.map { it.name }  ?: emptyList()
+
+        val startIndex = (page - 1) * size
+        val endIndex = minOf(startIndex + size, files.size)
+
+        return if (startIndex < files.size) {
+            files.subList(startIndex, endIndex)
+        } else {
+            emptyList()
+        }
+
+    }
+
+    override fun countPublicMediaFiles(): Int {
+        val publicImagesDir: File = PUBLIC_IMAGES_DIR
+        val files = publicImagesDir.listFiles()
+
+        return files?.count { it.isFile } ?: 0
+    }
+
+    override fun countPrivateMediaFiles(): Int {
+        val publicImagesDir: File = PRIVATE_IMAGES_DIR
+        val files = publicImagesDir.listFiles()
+
+        return files?.count { it.isFile } ?: 0
+    }
+
+    override suspend fun deleteMedia(file: File, public: Boolean) {
         file.delete()
+        if(!public) {
+            MongodbOperations().deleteItem<SavedMedia>(
+                collectionName = CollectionsInDb.Images,
+                filter = OperationField(Fields.Filename, file.name)
+            )
+        }
     }
 }

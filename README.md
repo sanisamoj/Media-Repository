@@ -16,13 +16,15 @@ Para acessar o Repositório de Mídias Sanisamoj visite:
 Você pode buscar um arquivo de mídia específico utilizando o seguinte endpoint:
 
 - Pesquisar por Mídia:
-> Endpoint: /media?media=media.jpeg
+> Endpoint: /media/media.jpeg
 > 
-> Exemplo: /media?media=minhaimagem.jpg
+> Exemplo: /media/minhaimagem.jpg
 > 
-> Exemplo: /media/private?media=minhaimagem.jpg&code=dsad
+> Exemplo: /media/private/minhaimagem.jpg?code=dsad
 > 
 > Substitua media.jpeg ou minhaimagem.jpg pelo arquivo de mídia específico que você deseja recuperar.
+
+> Endpoints disponíveis: https://documenter.getpostman.com/view/29175154/2sAXxLAZHU
 
 Exemplo de resposta:
 ```json

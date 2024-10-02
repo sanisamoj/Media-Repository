@@ -8,6 +8,7 @@ import com.sanisamoj.data.models.dataclass.ErrorResponse
 import io.ktor.http.HttpStatusCode
 
 fun errorResponse(errorMessage: String?): Pair<HttpStatusCode, ErrorResponse> {
+    println(errorMessage)
     val response = when (errorMessage) {
 
         Errors.InvalidLogin.description -> {
