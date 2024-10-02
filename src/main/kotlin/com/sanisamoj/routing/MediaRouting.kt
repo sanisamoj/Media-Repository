@@ -22,15 +22,15 @@ fun Route.mediaRouting() {
 
         rateLimit {
             
-            get("{media?}") {
-                val imageName: String = call.parameters["media"] ?: throw Error(Errors.MediaNameNotProvided.description)
+            get {
+                val imageName: String = call.request.queryParameters["media"] ?: throw Error(Errors.MediaNameNotProvided.description)
                 val image: File = MediaService().getMedia(imageName = imageName)
                 if (image.exists()) return@get call.respondFile(image)
                 else return@get call.respond(HttpStatusCode.NotFound)
             }
 
-            get("/private/{media?}") {
-                val imageName: String = call.parameters["media"] ?: throw Error(Errors.MediaNameNotProvided.description)
+            get("/private") {
+                val imageName: String = call.request.queryParameters["media"] ?: throw Error(Errors.MediaNameNotProvided.description)
                 val code: String = call.request.queryParameters["code"] ?: throw Error(Errors.ImageCodeNotProvided.description)
                 val image: File = MediaService().getPrivateMedia(imageName = imageName, code = code)
                 if (image.exists()) return@get call.respondFile(image)
