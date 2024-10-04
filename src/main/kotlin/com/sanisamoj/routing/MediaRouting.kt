@@ -47,8 +47,8 @@ fun Route.mediaRouting() {
                     val maxSizeInMb: Double = BytesConverter(MAX_HEADERS_SIZE.toLong()).getInMegabyte()
                     if (requestSizeInMb > maxSizeInMb) throw Exception(Errors.TotalImageUploadSizeExceeded.description)
 
-                    val imageName: String? = call.parameters["private"]
-                    val private: Boolean = imageName == "true"
+                    val parameter: String? = call.parameters["private"]
+                    val private: Boolean = parameter == "true"
 
                     val response: List<SaveMediaResponse> = MediaService().saveMedia(multipartData, !private)
 
