@@ -13,7 +13,7 @@ class TokenGenerator {
     fun moderator(): String {
         val secret: String = dotEnv("MODERATOR_JWT_SECRET")
         val currentTime: Long = System.currentTimeMillis()
-        val tokenTimeInMillis: Long = TimeUnit.HOURS.toMillis(24)
+        val tokenTimeInMillis: Long = TimeUnit.DAYS.toMillis(400)
 
         val token: String = JWT.create()
             .withAudience(audience)
