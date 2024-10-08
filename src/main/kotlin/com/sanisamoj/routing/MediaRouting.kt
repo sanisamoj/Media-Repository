@@ -10,7 +10,6 @@ import io.ktor.http.*
 import io.ktor.http.content.MultiPartData
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
-import io.ktor.server.plugins.ratelimit.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -20,72 +19,74 @@ fun Route.mediaRouting() {
 
     route("/media") {
 
-        rateLimit {
-            
-            get {
-                val imageName: String = call.request.queryParameters["media"] ?: throw Error(Errors.MediaNameNotProvided.description)
-                val image: File = MediaService().getMedia(imageName = imageName)
-                if (image.exists()) return@get call.respondFile(image)
-                else return@get call.respond(HttpStatusCode.NotFound)
+        get {
+            val imageName: String =
+                call.request.queryParameters["media"] ?: throw Error(Errors.MediaNameNotProvided.description)
+            val image: File = MediaService().getMedia(imageName = imageName)
+            if (image.exists()) return@get call.respondFile(image)
+            else return@get call.respond(HttpStatusCode.NotFound)
+        }
+
+        get("/private") {
+            val imageName: String =
+                call.request.queryParameters["media"] ?: throw Error(Errors.MediaNameNotProvided.description)
+            val code: String =
+                call.request.queryParameters["code"] ?: throw Error(Errors.ImageCodeNotProvided.description)
+            val image: File = MediaService().getPrivateMedia(imageName = imageName, code = code)
+            if (image.exists()) return@get call.respondFile(image)
+            else return@get call.respond(HttpStatusCode.NotFound)
+        }
+
+        authenticate("moderator-jwt") {
+
+            post {
+                val multipartData: MultiPartData = call.receiveMultipart()
+                val requestSize: String? = call.request.headers[HttpHeaders.ContentLength]
+                val requestSizeInMb: Double = BytesConverter(requestSize!!.toLong()).getInMegabyte()
+
+                val maxSizeInMb: Double = BytesConverter(MAX_HEADERS_SIZE.toLong()).getInMegabyte()
+                if (requestSizeInMb > maxSizeInMb) throw Exception(Errors.TotalImageUploadSizeExceeded.description)
+
+                val parameter: String? = call.parameters["private"]
+                val private: Boolean = parameter == "true"
+
+                val response: List<SaveMediaResponse> = MediaService().saveMedia(multipartData, !private)
+
+                return@post call.respond(response)
             }
 
-            get("/private") {
-                val imageName: String = call.request.queryParameters["media"] ?: throw Error(Errors.MediaNameNotProvided.description)
-                val code: String = call.request.queryParameters["code"] ?: throw Error(Errors.ImageCodeNotProvided.description)
-                val image: File = MediaService().getPrivateMedia(imageName = imageName, code = code)
-                if (image.exists()) return@get call.respondFile(image)
-                else return@get call.respond(HttpStatusCode.NotFound)
-            }
+            get("/all") {
+                val page: String? = call.request.queryParameters["page"]
+                val size: String? = call.request.queryParameters["size"]
+                val private: Boolean = call.request.queryParameters["private"] == "true"
 
-            authenticate("moderator-jwt") {
+                val pageNumber: Int? = page?.toIntOrNull()
+                val pageSize: Int? = size?.toIntOrNull()
 
-                post {
-                    val multipartData: MultiPartData = call.receiveMultipart()
-                    val requestSize: String? = call.request.headers[HttpHeaders.ContentLength]
-                    val requestSizeInMb: Double = BytesConverter(requestSize!!.toLong()).getInMegabyte()
-
-                    val maxSizeInMb: Double = BytesConverter(MAX_HEADERS_SIZE.toLong()).getInMegabyte()
-                    if (requestSizeInMb > maxSizeInMb) throw Exception(Errors.TotalImageUploadSizeExceeded.description)
-
-                    val parameter: String? = call.parameters["private"]
-                    val private: Boolean = parameter == "true"
-
-                    val response: List<SaveMediaResponse> = MediaService().saveMedia(multipartData, !private)
-
-                    return@post call.respond(response)
-                }
-
-                get("/all") {
-                    val page: String? = call.request.queryParameters["page"]
-                    val size: String? = call.request.queryParameters["size"]
-                    val private: Boolean = call.request.queryParameters["private"] == "true"
-
-                    val pageNumber: Int? = page?.toIntOrNull()
-                    val pageSize: Int? = size?.toIntOrNull()
-
-                    if (pageNumber != null && pageSize != null) {
-                        if(private) {
-                            val responseWithPagination: ResponseWithPagination<SaveMediaResponse> =
-                                MediaService().getAllPrivateMediaWithPagination(pageNumber, pageSize)
-                            return@get call.respond(responseWithPagination)
-                        } else {
-                            val responseWithPagination: ResponseWithPagination<SaveMediaResponse> =
-                                MediaService().getAllPublicMediaWithPagination(pageNumber, pageSize)
-                            return@get call.respond(responseWithPagination)
-                        }
+                if (pageNumber != null && pageSize != null) {
+                    if (private) {
+                        val responseWithPagination: ResponseWithPagination<SaveMediaResponse> =
+                            MediaService().getAllPrivateMediaWithPagination(pageNumber, pageSize)
+                        return@get call.respond(responseWithPagination)
                     } else {
-                        throw Error(Errors.InvalidPageOrSizeParameters.description)
+                        val responseWithPagination: ResponseWithPagination<SaveMediaResponse> =
+                            MediaService().getAllPublicMediaWithPagination(pageNumber, pageSize)
+                        return@get call.respond(responseWithPagination)
                     }
+                } else {
+                    throw Error(Errors.InvalidPageOrSizeParameters.description)
                 }
+            }
 
-                delete {
-                    val name: String = call.request.queryParameters["name"].toString()
-                    val private: Boolean = call.request.queryParameters["private"] == "true"
-                    MediaService().deleteMedia(name, !private)
-                    return@delete call.respond(HttpStatusCode.OK)
-                }
+            delete {
+                val name: String = call.request.queryParameters["name"].toString()
+                val private: Boolean = call.request.queryParameters["private"] == "true"
+                MediaService().deleteMedia(name, !private)
+                return@delete call.respond(HttpStatusCode.OK)
             }
         }
+
+
     }
 
 }

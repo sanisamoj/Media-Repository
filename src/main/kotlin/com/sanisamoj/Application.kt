@@ -13,7 +13,6 @@ fun main(args: Array<String>) {
 
 fun Application.module() {
     configureAuthentication()
-    configureRateLimit()
     configureStatusPage()
     configureSerialization()
     configureRouting()
