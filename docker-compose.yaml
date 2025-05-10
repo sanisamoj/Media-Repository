@@ -20,8 +20,8 @@ services:
     volumes:
       - mongo-data:/data/dbs
     environment:
-      MONGO_INITDB_ROOT_USERNAME: jomasinas
-      MONGO_INITDB_ROOT_PASSWORD: 97005209
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: senha
     networks:
       - default_network_media
 

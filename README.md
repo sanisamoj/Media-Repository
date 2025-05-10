@@ -61,7 +61,7 @@ Para instalar o projeto para testes, utilizaremos o Docker.
 
 ```.env
 #URL do banco de dados MONGODB
-SERVER_URL=mongodb://<user>:<password>@host.docker.internal:27017
+SERVER_URL=mongodb://<user>:<password>@host.docker.internal:27018
 #Nome do banco de dados do MONGODB
 NAME_DATABASE=ImageService
 
@@ -84,7 +84,3 @@ MODERATOR_PASSWORD=
 #### Execute o comando a seguir para executar a imagem criada com o Docker.
 
     docker run --name image_repo -p 6868:6868 image_repo:latest
-
-#### Caso queira executar com docker-compose.
-
-    docker-compose -p image_repo up --build -d
