@@ -61,7 +61,7 @@ Para instalar o projeto para testes, utilizaremos o Docker.
 
 ```.env
 #URL do banco de dados MONGODB
-SERVER_URL=mongodb://host.docker.internal:27017
+SERVER_URL=mongodb://<user>:<password>@host.docker.internal:27017
 #Nome do banco de dados do MONGODB
 NAME_DATABASE=ImageService
 
@@ -85,30 +85,6 @@ MODERATOR_PASSWORD=
 
     docker run --name image_repo -p 6868:6868 image_repo:latest
 
-> As portas pré-definidas podem ser alteradas no arquivo *"aplication.conf"*, e devem ser refletidas na construção da imagem com o Docker.
+#### Caso queira executar com docker-compose.
 
-
-Link para exemplos:
-> https://www.sanisamojrepository.com/image-repo/media?media=tqUzlEKiwYEF8nnrVAnUsE43PRJl5vZBaGNR-sodium-odyssey.webp
-
-> https://www.sanisamojrepository.com/image-repo/media?media=kqHjqNreBbPisZukMEQLnHapbD26P354PtT9-anime-girl-nun-with-tattoo-2k-wallpaper-uhdpaper.com-740@3@a.jpg
-
-> https://www.sanisamojrepository.com/image-repo/media?media=ujcKswGfSeVgQzkCqlA7bWuptF3BqGOJlEyC-WhatsApp%20Image%202024-01-12%20at%2014.31.54.jpeg
-
-> https://www.sanisamojrepository.com/image-repo/media?media=jq5Xx7GWQvJKyg0fkF1auhmcjBTGzkgB80zu-_9f9747d1-7edc-4bb8-b25a-e76dfbc812ba.jpg
-
-> https://www.sanisamojrepository.com/image-repo/media?media=liS3bj4C7KYh4iT5B27BuOpUkDHH00FqMsF3-WhatsApp%20Image%202024-09-06%20at%2017.11.18.jpeg
-
-> https://www.sanisamojrepository.com/image-repo/media?media=vnAX9RDO8uK3w5QxhrOimy3d2LObcDP8W3Mb-WhatsApp%20Image%202024-09-06%20at%2017.11.17.jpeg
-
-> https://www.sanisamojrepository.com/image-repo/media?media=r7jt6m1xG0NocEBiojwrhWWcN5n74LZNnowh-giphy1.webp
-
-> https://www.sanisamojrepository.com/image-repo/media?media=eGSgfuVwHo7EM4GIgfTCKYqWvqbHhMAGrJYb-giphy3.webp
-
-> https://www.sanisamojrepository.com/image-repo/media?media=0W23t15LtWfIlwae20wWhQdKLr1IXUolVSzj-_a028f297-c5b4-4c84-814e-5d6d893486dc.jpg
-
-> https://www.sanisamojrepository.com/image-repo/media?media=krAcNxZX9t76ddGGIZ0Zgvhsd9IwpZcmoC0P-_afeaccc7-69e7-4de8-b755-bebb37ecc61a.jpg
-
-> https://www.sanisamojrepository.com/image-repo/media?media=Yywzs3f9CfKlbDxprqePA9exhKzbDZSoyBTz-_0c919b19-40c2-45cb-9566-0f2ed462da1b.jpg
-
-> https://www.sanisamojrepository.com/image-repo/media?media=2aL7ZiuKsu6y44k8dEXNTtWjqwGTpLR4Rc3L-_32143c12-7ab6-4ea1-91e1-1222e7ed73c8.jpg
+    docker-compose -p image_repo up --build -d

@@ -1,0 +1,32 @@
+services:
+  backend:
+    build:
+      context: .
+    container_name: image_repo
+    ports:
+      - "6868:6868"
+    depends_on:
+      - mongodb
+    networks:
+      - default_network_media
+    volumes:
+      - /root/images:/app/images
+
+  mongodb:
+    image: mongodb/mongodb-community-server:latest
+    container_name: media-repo-mongodb
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo-data:/data/dbs
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: jomasinas
+      MONGO_INITDB_ROOT_PASSWORD: 97005209
+    networks:
+      - default_network_media
+
+volumes:
+  mongo-data:
+
+networks:
+  default_network_media:
