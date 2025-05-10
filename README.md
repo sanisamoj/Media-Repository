@@ -24,7 +24,7 @@ Você pode buscar um arquivo de mídia específico utilizando o seguinte endpoin
 > 
 > Substitua media.jpeg ou minhaimagem.jpg pelo arquivo de mídia específico que você deseja recuperar.
 
-> Endpoints disponíveis: https://documenter.getpostman.com/view/29175154/2sAXxLAZHU
+> Endpoints disponíveis: https://documenter.getpostman.com/view/29175154/2sAXxLAZHU#9b3c2d65-2936-4ff2-be22-37dc5d51a1f7
 
 Exemplo de resposta:
 ```json
@@ -84,3 +84,7 @@ MODERATOR_PASSWORD=
 #### Execute o comando a seguir para executar a imagem criada com o Docker.
 
     docker run --name image_repo -p 6868:6868 image_repo:latest
+
+#### Caso queira executar com docker-compose.
+
+    docker-compose -p image_repo up --build -d
